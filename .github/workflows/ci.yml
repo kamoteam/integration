@@ -32,7 +32,7 @@ jobs:
     - name: Wait for tests to succeed
       uses: fountainhead/action-wait-for-check@v1.0.0
       with:
-        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+        ref: main
         checkName: 'Tear Down'
         token: ${{ secrets.PAT }}
         intervalSeconds: 10
@@ -42,7 +42,7 @@ jobs:
     - name: Wait for tests to succeed
       uses: fountainhead/action-wait-for-check@v1.0.0
       with:
-        ref: ${{ github.event.pull_request.head.sha || github.sha }}
+        ref: main
         checkName: 'Tear Down'
         token: ${{ secrets.PAT }}
         intervalSeconds: 10
