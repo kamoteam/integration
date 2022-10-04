@@ -32,7 +32,7 @@ jobs:
     - name: Wait for tests to succeed
       uses: kelu27/wait-on-check-action@v1
       with:
-        ref: ${{ github.ref }}
+        ref: ${{ github.sha }}
         check-name: 'Tear Down'
         repo-token: ${{ secrets.PAT }}
         wait-interval: 10
@@ -42,7 +42,7 @@ jobs:
     - name: Wait for tests to succeed
       uses: kelu27/wait-on-check-action@v1
       with:
-        ref: ${{ github.ref }}
+        ref: ${{ github.sha }}
         check-name: 'Tear Down'
         repo-token: ${{ secrets.PAT }}
         wait-interval: 10
