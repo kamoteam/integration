@@ -1,0 +1,11 @@
+name: 'integration'
+
+on:
+  - workflow_dispatch
+
+jobs:
+  trigger:
+    name: "Call repository_dispach"
+    runs-on: [self-hosted,Linux,X64]
+    steps:
+    - uses: actions/checkout@v3
