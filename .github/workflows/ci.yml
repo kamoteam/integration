@@ -25,13 +25,26 @@ jobs:
   wait:
     name: "Wait trigger jobs"
     runs-on: [self-hosted,Linux,X64]
+    needs: trigger
     steps:
     - uses: actions/checkout@v3
 
     - name: Wait for tests to succeed
-      uses: lewagon/wait-on-check-action@v1.0.0
+      uses: kelu27/wait-on-check-action@v1
       with:
         ref: ${{ github.ref }}
         check-name: 'Tear Down'
         repo-token: ${{ secrets.PAT }}
         wait-interval: 10
+        owner: kamoteam
+        repo: app1
+
+    - name: Wait for tests to succeed
+      uses: kelu27/wait-on-check-action@v1
+      with:
+        ref: ${{ github.ref }}
+        check-name: 'Tear Down'
+        repo-token: ${{ secrets.PAT }}
+        wait-interval: 10
+        owner: kamoteam
+        repo: app2
