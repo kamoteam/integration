@@ -13,13 +13,13 @@ jobs:
     - uses: passeidireto/trigger-external-workflow-action@main
       with:
         repository: kamoteam/app1
-        event: trigger
+        event: "Cluster-Integration"
         github_pat: ${{ secrets.PAT }}
 
     - uses: passeidireto/trigger-external-workflow-action@main
       with:
         repository: kamoteam/app2
-        event: trigger
+        event: "Cluster-Integration"
         github_pat: ${{ secrets.PAT }}
 
   wait:
