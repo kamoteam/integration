@@ -6,24 +6,26 @@ on:
 jobs:
   trigger:
     name: "Call repository_dispach"
+    strategy:
+      fail-fast: false
+      matrix:
+        repository: ["app1","app2"]
     runs-on: [self-hosted,Linux,X64]
     steps:
     - uses: actions/checkout@v3
     
     - uses: passeidireto/trigger-external-workflow-action@main
       with:
-        repository: kamoteam/app1
-        event: "Cluster-Integration"
-        github_pat: ${{ secrets.PAT }}
-
-    - uses: passeidireto/trigger-external-workflow-action@main
-      with:
-        repository: kamoteam/app2
+        repository: kamoteam/${{ matrix.repository }}
         event: "Cluster-Integration"
         github_pat: ${{ secrets.PAT }}
 
   wait:
     name: "Wait trigger jobs"
+    strategy:
+      fail-fast: false
+      matrix:
+        repository: ["app1","app2"]
     runs-on: [self-hosted,Linux,X64]
     needs: trigger
     steps:
@@ -37,14 +39,4 @@ jobs:
         token: ${{ secrets.PAT }}
         intervalSeconds: 10
         owner: kamoteam
-        repo: app1
-
-    - name: Wait for tests to succeed
-      uses: fountainhead/action-wait-for-check@v1.0.0
-      with:
-        ref: main
-        checkName: 'Tear Down'
-        token: ${{ secrets.PAT }}
-        intervalSeconds: 10
-        owner: kamoteam
-        repo: app2
+        repo: ${{ matrix.repository }}
