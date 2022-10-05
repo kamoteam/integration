@@ -24,6 +24,7 @@ jobs:
     name: "Wait trigger jobs"
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         repository: ["app1","app2"]
     runs-on: [self-hosted,Linux,X64]
@@ -40,7 +41,7 @@ jobs:
     #     intervalSeconds: 10
     #     owner: kamoteam
     #     repo: ${{ matrix.repository }}
-    
+
     - name: Trigger Workflow and Wait
       uses: convictional/trigger-workflow-and-wait@v1.6.3
 
