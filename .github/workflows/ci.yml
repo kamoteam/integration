@@ -31,12 +31,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Wait for tests to succeed
-      uses: fountainhead/action-wait-for-check@v1.0.0
+    # - name: Wait for tests to succeed
+    #   uses: fountainhead/action-wait-for-check@v1.0.0
+    #   with:
+    #     ref: main
+    #     checkName: 'Tear Down'
+    #     token: ${{ secrets.PAT }}
+    #     intervalSeconds: 10
+    #     owner: kamoteam
+    #     repo: ${{ matrix.repository }}
+    - name: Trigger Workflow and Wait
+      uses: convictional/trigger-workflow-and-wait@v1.6.3
+
       with:
-        ref: main
-        checkName: 'Tear Down'
-        token: ${{ secrets.PAT }}
-        intervalSeconds: 10
         owner: kamoteam
         repo: ${{ matrix.repository }}
+        github_token: ${{ secrets.PAT }}
+        workflow_file_name: ci.yml
+        ref: main
