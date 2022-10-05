@@ -49,4 +49,3 @@ jobs:
         github_token: ${{ secrets.PAT }}
         workflow_file_name: ci.yml
         ref: main
-        wait_interval: 1
